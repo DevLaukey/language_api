@@ -1,12 +1,33 @@
 from rest_framework import serializers
-from .models import EnglishPhrase, ExampleSentence
-
-class EnglishPhraseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EnglishPhrase
-        fields = '__all__'
+from .models import EnglishPhrase, ExampleSentence, Exercise, ExerciseQuestion, QuestionChoice
 
 class ExampleSentenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExampleSentence
-        fields = '__all__'
+        fields = ('id', 'sentence')
+
+class EnglishPhraseSerializer(serializers.ModelSerializer):
+    example_sentences = ExampleSentenceSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = EnglishPhrase
+        fields = ('id', 'phrase', 'example_sentences')
+
+class QuestionChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionChoice
+        fields = ('id', 'text')
+
+class ExerciseQuestionSerializer(serializers.ModelSerializer):
+    choices = QuestionChoiceSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = ExerciseQuestion
+        fields = ('id', 'text', 'choices', 'correct_choice')
+
+class ExerciseSerializer(serializers.ModelSerializer):
+    questions = ExerciseQuestionSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Exercise
+        fields = ('id', 'title', 'is_done', 'created_at', 'questions')

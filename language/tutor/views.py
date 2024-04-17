@@ -1,25 +1,28 @@
 from rest_framework import viewsets
-from rest_framework.response import Response
-from .models import EnglishPhrase, ExampleSentence
-from rest_framework import serializers
-from .serializers import EnglishPhraseSerializer, ExampleSentenceSerializer
+from .models import EnglishPhrase, ExampleSentence, Exercise, ExerciseQuestion, QuestionChoice
+from .serializers import EnglishPhraseSerializer, ExampleSentenceSerializer, ExerciseSerializer, ExerciseQuestionSerializer, QuestionChoiceSerializer
 
-# Serializer classes
-class EnglishPhraseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = EnglishPhrase
-        fields = '__all__'
-
-class ExampleSentenceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExampleSentence
-        fields = '__all__'
-
-# Viewsets
+# Viewset for EnglishPhrase model
 class EnglishPhraseViewSet(viewsets.ModelViewSet):
     queryset = EnglishPhrase.objects.all()
     serializer_class = EnglishPhraseSerializer
 
+# Viewset for ExampleSentence model
 class ExampleSentenceViewSet(viewsets.ModelViewSet):
     queryset = ExampleSentence.objects.all()
     serializer_class = ExampleSentenceSerializer
+
+# Viewset for Exercise model
+class ExerciseViewSet(viewsets.ModelViewSet):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
+
+# Viewset for ExerciseQuestion model
+class ExerciseQuestionViewSet(viewsets.ModelViewSet):
+    queryset = ExerciseQuestion.objects.all()
+    serializer_class = ExerciseQuestionSerializer
+
+# Viewset for QuestionChoice model
+class QuestionChoiceViewSet(viewsets.ModelViewSet):
+    queryset = QuestionChoice.objects.all()
+    serializer_class = QuestionChoiceSerializer
