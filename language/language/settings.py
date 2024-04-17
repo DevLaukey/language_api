@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'rest_auth.registration',
     'rest_framework',
     'tutor',
     'rest_framework.authtoken',
@@ -80,6 +79,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'language.wsgi.application'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 
 DATABASES = {
