@@ -15,6 +15,7 @@ router.register(r'exercise-questions', ExerciseQuestionViewSet, basename='exerci
 router.register(r'question-choices', QuestionChoiceViewSet, basename='questionchoice')
 router.register(r'register', UserRegistrationView, basename='register')
 urlpatterns = [
+    path('auth/', include('rest_auth.urls'), name='auth'),
     path('', include(router.urls)),
 
 ]

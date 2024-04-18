@@ -5,12 +5,14 @@ from .models import EnglishPhrase, ExampleSentence, Exercise, ExerciseQuestion, 
 from .serializers import EnglishPhraseSerializer, ExampleSentenceSerializer, ExerciseSerializer, ExerciseQuestionSerializer, QuestionChoiceSerializer, UserRegistrationSerializer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 
 
 class UserRegistrationView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
     permission_classes = (permissions.AllowAny,)
+    authentication_classes = (BasicAuthentication, TokenAuthentication,)
 
     def create(self, request, *args, **kwargs):
         # Override the create method to hash the password before saving the user
